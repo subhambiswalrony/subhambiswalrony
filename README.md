@@ -7,7 +7,7 @@
 
 - 🌱 I’m currently learning **Python, JAVA, HTML, CSS, Tailwind CSS, JavaScript, React, Django**
 
-- 💬 Ask me about **Python, JAVA, React**
+- 💬 Ask me about **Python, JAVA, HTML, CSS, React**
 
 - 📫 How to reach me **biswalsubhamrony@gmail.com**
 
@@ -17,7 +17,6 @@
 <p align="left">
 <a href="https://twitter.com/subhamb50420903" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="subhamb50420903" height="30" width="40" /></a>
 <a href="https://linkedin.com/in/subham-biswal-2b5486258" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="subham-biswal-2b5486258" height="30" width="40" /></a>
-
 <a href="https://fb.com/subham.biswal.9883" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="subham.biswal.9883" height="30" width="40" /></a>
 <a href="https://instagram.com/subhambiswal_rony" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="subhambiswal_rony" height="30" width="40" /></a>
 </p>
