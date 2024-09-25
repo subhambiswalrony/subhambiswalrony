@@ -11,6 +11,8 @@
 
 - 📫 How to reach me **biswalsubhamrony@gmail.com**
 
+<p align="left"><img src="https://miro.medium.com/v2/resize:fit:1360/1*zVnWJtyGOX_kUIDm6ccCfQ.gif"></p>
+
 <h3 align="left">Connect with me:</h3>
 <p align="left">
 <a href="https://twitter.com/subhamb50420903" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="subhamb50420903" height="30" width="40" /></a>
