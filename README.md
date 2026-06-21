@@ -1,20 +1,14 @@
-
-
 <div align="center">
-  <img src="https://komarev.com/ghpvc/?username=subhambiswalrony&label=Profile+Views&color=6e40c9&style=for-the-badge" alt="Profile Views" />
-  &nbsp;
-  <img src="https://img.shields.io/github/followers/subhambiswalrony?label=Followers&style=for-the-badge&color=6e40c9" alt="Followers" />
-</div>
 
-<br/>
+<img src="https://komarev.com/ghpvc/?username=subhambiswalrony&label=Profile+Views&color=6e40c9&style=for-the-badge" alt="Profile Views" />
+&nbsp;
+<img src="https://img.shields.io/github/followers/subhambiswalrony?label=Followers&style=for-the-badge&color=6e40c9" alt="Followers" />
 
-<div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&pause=1000&color=A78BFA&center=true&vCenter=true&width=750&lines=Hi+there%2C+I'm+Subham+Biswal+%F0%9F%91%8B;Full+Stack+Developer+%7C+AI%2FML+Enthusiast;Building+Scalable+Web+%26+AI+Solutions;Open+to+Internships+%26+Opportunities!" alt="Typing SVG" />
-</div>
+<br/><br/>
 
-<br/>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&pause=1000&color=A78BFA&center=true&vCenter=true&width=750&lines=Hi+there%2C+I'm+Subham+Biswal+%F0%9F%91%8B;Full+Stack+Developer+%7C+AI%2FML+Enthusiast;Building+Scalable+Web+%26+AI+Solutions;Open+to+Internships+%26+Opportunities!" alt="Typing SVG" />
 
-<div align="center">
+<br/><br/>
 
 [![Portfolio](https://img.shields.io/badge/🌐_Portfolio-biswalsubham.vercel.app-6e40c9?style=for-the-badge)](https://biswalsubham.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/subham-biswal/)
@@ -25,21 +19,11 @@
 
 ---
 
-<!--  🐍 Contribution Snake — moved to top  -->
-
-<table width="100%">
-<thead>
-<tr>
-<td>
-&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham — contributions.svg</code></b>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
 <div align="center">
+
+### 🔴 🟡 🟢 &nbsp; `~/subham — contributions.svg`
+
+<br/>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake-dark.svg" />
@@ -49,28 +33,13 @@
 
 </div>
 
-</td>
-</tr>
-</tbody>
-</table>
-
-<br/>
-
 ---
 
-<!--  About Me  -->
+<div align="center">
 
-<table width="100%">
-<thead>
-<tr>
-<td>
-&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham — about.sh</code></b>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
+### 🔴 🟡 🟢 &nbsp; `~/subham — about.sh`
+
+<br/>
 
 ```yaml
 ┌─────────────────────────────────────────────────────────┐
@@ -86,7 +55,7 @@
 └─────────────────────────────────────────────────────────┘
 ```
 
-<div align="center">
+<br/>
 
 🔭 Currently building **AI-powered web apps** and **automation tools**
 
@@ -100,42 +69,31 @@
 
 </div>
 
-</td>
-</tr>
-</tbody>
-</table>
-
-<br/>
-
 ---
 
-<!--  Tech Stack  -->
-
-<table width="100%">
-<thead>
-<tr>
-<td>
-&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham — skills.json</code></b>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
 <div align="center">
+
+### 🔴 🟡 🟢 &nbsp; `~/subham — skills.json`
+
+<br/>
 
 **⚡ Frontend**
 
 <img src="https://skillicons.dev/icons?i=html,css,javascript,react,nextjs,tailwind,vite,threejs" />
 
+<br/>
+
 **⚙️ Backend & Languages**
 
 <img src="https://skillicons.dev/icons?i=python,java,nodejs,express,flask,django,c" />
 
+<br/>
+
 **🗄️ Database & Cloud**
 
 <img src="https://skillicons.dev/icons?i=mysql,mongodb,sqlite,firebase,aws" />
+
+<br/>
 
 **🛠️ Tools & IDE**
 
@@ -143,64 +101,30 @@
 
 </div>
 
-</td>
-</tr>
-</tbody>
-</table>
-
-<br/>
-
 ---
 
-<!--  Projects  -->
-
-<table width="100%">
-<thead>
-<tr>
-<td>
-&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham/projects — ls -la</code></b>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
 <div align="center">
+
+### 🔴 🟡 🟢 &nbsp; `~/subham/projects — ls -la`
+
+<br/>
 
 | 🏗️ Project | 📝 Description | 🔧 Stack | 🔗 |
 |:---:|:---:|:---:|:---:|
 | **🌾 AgriGPT** | AI-powered agricultural expert system giving real-time farming guidance to Indian farmers in native languages using advanced LLMs | `TypeScript` `Next.js` `AI/LLM` | [→](https://github.com/subhambiswalrony/AgriGPT-An-AI-Farmer-Intelligence) |
 | **🤖 CODEC AI ChatBot** | Smart AI chatbot built with Python, Flask & TensorFlow for company info, internship details & service guidance | `Python` `Flask` `TensorFlow` `JS` | [→](https://github.com/subhambiswalrony/CODEC-AI-Powered-ChatBot) |
 | **🛢️ IndianOil Chemical Portal** | Full-stack enterprise web portal for Indian Oil employees to log, manage & review daily chemical consumption ⭐15 | `TypeScript` `React` `MySQL` | [→](https://github.com/subhambiswalrony/Indian-Oil---Daily-Chemical-Consumption-Portal) |
-| **📄 Java Resume Builder** | Desktop GUI app that lets users fill in their details and generate polished, formatted PDF resumes in one click | `Java` `Swing` `PDF` | [→](https://github.com/subhambiswalrony/JAVA-Resume-Builder) |
+| **📄 Java Resume Builder** | Desktop GUI app that lets users fill their details and generate polished formatted PDF resumes in one click | `Java` `Swing` `PDF` | [→](https://github.com/subhambiswalrony/JAVA-Resume-Builder) |
 
 </div>
 
-</td>
-</tr>
-</tbody>
-</table>
-
-<br/>
-
 ---
 
-<!--  GitHub Stats  -->
-
-<table width="100%">
-<thead>
-<tr>
-<td>
-&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham — git stats</code></b>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
 <div align="center">
+
+### 🔴 🟡 🟢 &nbsp; `~/subham — git stats`
+
+<br/>
 
 <img src="https://streak-stats.demolab.com?user=subhambiswalrony&theme=tokyonight&border_radius=12&count_private=true" alt="GitHub Streak Stats" />
 
@@ -211,59 +135,25 @@
 
 </div>
 
-</td>
-</tr>
-</tbody>
-</table>
-
-<br/>
-
 ---
 
-<!--  Trophies  -->
-
-<table width="100%">
-<thead>
-<tr>
-<td>
-&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham — trophies.sh</code></b>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
 <div align="center">
+
+### 🔴 🟡 🟢 &nbsp; `~/subham — trophies.sh`
+
+<br/>
 
 <img src="https://github-profile-trophy.vercel.app/?username=subhambiswalrony&theme=algolia&no-frame=true&no-bg=false&margin-w=8&column=4&rank=SECRET,SSS,SS,S,AAA,AA,A,B,C" alt="GitHub Trophies" />
 
 </div>
 
-</td>
-</tr>
-</tbody>
-</table>
-
-<br/>
-
 ---
 
-<!--  Goals  -->
-
-<table width="100%">
-<thead>
-<tr>
-<td>
-&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham — goals.sh</code></b>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
 <div align="center">
+
+### 🔴 🟡 🟢 &nbsp; `~/subham — goals.sh`
+
+<br/>
 
 ```bash
 $ cat goals_2025_2026.txt
@@ -280,13 +170,6 @@ Let's build something amazing together 🚀
 ```
 
 </div>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<br/>
 
 ---
 
