@@ -19,9 +19,9 @@
 
 ---
 
-<div align="center">
-
 ### 🔴 🟡 🟢 &nbsp; `~/subham — contributions.svg`
+
+<div align="center">
 
 <br/>
 
@@ -35,9 +35,9 @@
 
 ---
 
-<div align="center">
-
 ### 🔴 🟡 🟢 &nbsp; `~/subham — achievements.json`
+
+<div align="center">
 
 <br/>
 
@@ -51,9 +51,9 @@
 
 ---
 
-<div align="center">
-
 ### 🔴 🟡 🟢 &nbsp; `~/subham — about.sh`
+
+<div align="center">
 
 <br/>
 
@@ -87,9 +87,9 @@
 
 ---
 
-<div align="center">
-
 ### 🔴 🟡 🟢 &nbsp; `~/subham — skills.json`
+
+<div align="center">
 
 <br/>
 
@@ -119,9 +119,9 @@
 
 ---
 
-<div align="center">
-
 ### 🔴 🟡 🟢 &nbsp; `~/subham/projects — ls -la`
+
+<div align="center">
 
 <br/>
 
@@ -136,9 +136,9 @@
 
 ---
 
-<div align="center">
-
 ### 🔴 🟡 🟢 &nbsp; `~/subham — git stats`
+
+<div align="center">
 
 <br/>
 
@@ -157,9 +157,9 @@
 
 ---
 
-<div align="center">
-
 ### 🔴 🟡 🟢 &nbsp; `~/subham — trophies.sh`
+
+<div align="center">
 
 <br/>
 
@@ -176,9 +176,9 @@
 
 ---
 
-<div align="center">
-
 ### 🔴 🟡 🟢 &nbsp; `~/subham — goals.sh`
+
+<div align="center">
 
 <br/>
 
