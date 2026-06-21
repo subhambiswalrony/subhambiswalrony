@@ -1,8 +1,4 @@
-<div align="center">
-  <img src="./assets/banner.png" alt="Subham Biswal — Full Stack Developer | AI/ML Enthusiast" width="100%" />
-</div>
 
-<br/>
 
 <div align="center">
   <img src="https://komarev.com/ghpvc/?username=subhambiswalrony&label=Profile+Views&color=6e40c9&style=for-the-badge" alt="Profile Views" />
@@ -90,11 +86,19 @@
 └─────────────────────────────────────────────────────────┘
 ```
 
-- 🔭 Currently building **AI-powered web apps** and **automation tools**
-- 🌱 Actively learning **React**, **TailwindCSS**, **AWS**, and **Machine Learning**
-- 💡 Passionate about solving real-world problems through elegant software
-- 🎤 PowerPoint Specialist — selected as **PPT L1 Trainee** at Integreon
-- 🎵 Hobbies: Singing and crafting impactful presentations
+<div align="center">
+
+🔭 Currently building **AI-powered web apps** and **automation tools**
+
+🌱 Actively learning **React**, **TailwindCSS**, **AWS**, and **Machine Learning**
+
+💡 Passionate about solving real-world problems through elegant software
+
+🎤 PowerPoint Specialist — selected as **PPT L1 Trainee** at Integreon
+
+🎵 Hobbies: Singing and crafting impactful presentations
+
+</div>
 
 </td>
 </tr>
@@ -162,12 +166,16 @@
 <tr>
 <td>
 
+<div align="center">
+
 | 🏗️ Project | 📝 Description | 🔧 Stack | 🔗 |
-|:---|:---|:---|:---:|
+|:---:|:---:|:---:|:---:|
 | **🌾 AgriGPT** | AI-powered agricultural expert system giving real-time farming guidance to Indian farmers in native languages using advanced LLMs | `TypeScript` `Next.js` `AI/LLM` | [→](https://github.com/subhambiswalrony/AgriGPT-An-AI-Farmer-Intelligence) |
 | **🤖 CODEC AI ChatBot** | Smart AI chatbot built with Python, Flask & TensorFlow for company info, internship details & service guidance | `Python` `Flask` `TensorFlow` `JS` | [→](https://github.com/subhambiswalrony/CODEC-AI-Powered-ChatBot) |
 | **🛢️ IndianOil Chemical Portal** | Full-stack enterprise web portal for Indian Oil employees to log, manage & review daily chemical consumption ⭐15 | `TypeScript` `React` `MySQL` | [→](https://github.com/subhambiswalrony/Indian-Oil---Daily-Chemical-Consumption-Portal) |
 | **📄 Java Resume Builder** | Desktop GUI app that lets users fill in their details and generate polished, formatted PDF resumes in one click | `Java` `Swing` `PDF` | [→](https://github.com/subhambiswalrony/JAVA-Resume-Builder) |
+
+</div>
 
 </td>
 </tr>
@@ -255,6 +263,8 @@
 <tr>
 <td>
 
+<div align="center">
+
 ```bash
 $ cat goals_2025_2026.txt
 
@@ -268,6 +278,8 @@ $ cat goals_2025_2026.txt
 $ echo "Let's build something amazing together 🚀"
 Let's build something amazing together 🚀
 ```
+
+</div>
 
 </td>
 </tr>
