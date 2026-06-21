@@ -126,7 +126,7 @@
 
 <br/>
 
-<img src="https://streak-stats.demolab.com?user=subhambiswalrony&theme=react-dark&border_radius=12&count_private=true" alt="GitHub Streak Stats" />
+<img src="https://streak-stats.demolab.com?user=subhambiswalrony&theme=dark&border_radius=12&count_private=true&ring=61DAFB&fire=61DAFB&currStreakLabel=61DAFB&sideLabels=61DAFB&stroke=61DAFB30" alt="GitHub Streak Stats" />
 
 <br/><br/>
 
