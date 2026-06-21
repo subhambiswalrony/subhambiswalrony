@@ -126,12 +126,12 @@
 
 <br/>
 
-<img src="https://streak-stats.demolab.com?user=subhambiswalrony&theme=tokyonight&border_radius=12&count_private=true" alt="GitHub Streak Stats" />
+<img src="https://streak-stats.demolab.com?user=subhambiswalrony&theme=react-dark&border_radius=12&count_private=true" alt="GitHub Streak Stats" />
 
 <br/><br/>
 
-<img width="400" src="https://github-readme-stats.vercel.app/api?username=subhambiswalrony&count_private=true&show_icons=true&theme=tokyonight&rank_icon=github&border_radius=12&include_all_commits=true" alt="GitHub Stats" />
-<img width="340" src="https://github-readme-stats.vercel.app/api/top-langs/?username=subhambiswalrony&show_icons=true&locale=en&layout=compact&theme=tokyonight&border_radius=12&size_weight=0.5&count_weight=0.5&exclude_repo=github-readme-stats&langs_count=8" alt="Top Languages" />
+<img width="400" src="https://github-readme-stats.vercel.app/api?username=subhambiswalrony&count_private=true&show_icons=true&theme=react&rank_icon=github&border_radius=12&include_all_commits=true" alt="GitHub Stats" />
+<img width="340" src="https://github-readme-stats.vercel.app/api/top-langs/?username=subhambiswalrony&show_icons=true&locale=en&layout=compact&theme=react&border_radius=12&size_weight=0.5&count_weight=0.5&exclude_repo=github-readme-stats&langs_count=8" alt="Top Languages" />
 
 <br/><br/>
 
@@ -147,14 +147,14 @@
 
 <br/>
 
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=subhambiswalrony&theme=tokyonight" width="100%" alt="Profile Details" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=subhambiswalrony&theme=2077" width="100%" alt="Profile Details" />
 
 <br/>
 
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=subhambiswalrony&theme=tokyonight" alt="Repos per Language" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=subhambiswalrony&theme=tokyonight" alt="Most Commit Language" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=subhambiswalrony&theme=tokyonight" alt="Stats" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=subhambiswalrony&theme=tokyonight&utcOffset=5.5" alt="Productive Time" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=subhambiswalrony&theme=2077" alt="Repos per Language" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=subhambiswalrony&theme=2077" alt="Most Commit Language" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=subhambiswalrony&theme=2077" alt="Stats" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=subhambiswalrony&theme=2077&utcOffset=5.5" alt="Productive Time" />
 
 </div>
 
