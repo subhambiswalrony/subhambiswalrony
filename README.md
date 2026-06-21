@@ -147,7 +147,14 @@
 
 <br/>
 
-<img src="https://github-profile-trophy.vercel.app/?username=subhambiswalrony&theme=algolia&no-frame=true&no-bg=false&margin-w=8&column=4&rank=SECRET,SSS,SS,S,AAA,AA,A,B,C" alt="GitHub Trophies" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=subhambiswalrony&theme=tokyonight" width="100%" alt="Profile Details" />
+
+<br/>
+
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=subhambiswalrony&theme=tokyonight" alt="Repos per Language" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=subhambiswalrony&theme=tokyonight" alt="Most Commit Language" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=subhambiswalrony&theme=tokyonight" alt="Stats" />
+<img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=subhambiswalrony&theme=tokyonight&utcOffset=5.5" alt="Productive Time" />
 
 </div>
 
