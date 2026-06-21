@@ -160,6 +160,24 @@
 
 ---
 
+### 🔴 🟡 🟢 &nbsp; `~/subham — achievements.json`
+
+<br/>
+
+<img src="https://github.githubassets.com/images/modules/profile/achievements/starstruck-default.png" width="90" title="Starstruck" alt="Starstruck" />
+<img src="https://github.githubassets.com/images/modules/profile/achievements/pair-extraordinaire-default.png" width="90" title="Pair Extraordinaire" alt="Pair Extraordinaire" />
+<img src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png" width="90" title="Pull Shark" alt="Pull Shark" />
+<img src="https://github.githubassets.com/images/modules/profile/achievements/yolo-default.png" width="90" title="YOLO" alt="YOLO" />
+<img src="https://github.githubassets.com/images/modules/profile/achievements/quickdraw-default.png" width="90" title="Quickdraw" alt="Quickdraw" />
+
+<br/>
+
+⭐ **Starstruck** &nbsp;|&nbsp; 👥 **Pair Extraordinaire** &nbsp;|&nbsp; 🦈 **Pull Shark** &nbsp;|&nbsp; 🎯 **YOLO** &nbsp;|&nbsp; ⚡ **Quickdraw**
+
+</div>
+
+---
+
 <div align="center">
 
 ### 🔴 🟡 🟢 &nbsp; `~/subham — goals.sh`
