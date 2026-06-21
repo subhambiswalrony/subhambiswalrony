@@ -29,9 +29,40 @@
 
 ---
 
-<!--  ╔══════════════════════════════════════╗
-      ║         macOS Window: About Me       ║
-      ╚══════════════════════════════════════╝  -->
+<!--  🐍 Contribution Snake — moved to top  -->
+
+<table width="100%">
+<thead>
+<tr>
+<td>
+&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham — contributions.svg</code></b>
+</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake.svg" />
+  <img alt="Snake eating my contributions" src="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake-dark.svg" />
+</picture>
+
+</div>
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<br/>
+
+---
+
+<!--  About Me  -->
 
 <table width="100%">
 <thead>
@@ -54,7 +85,7 @@
 │  education   :  B.Tech CSE — GITA Autonomous College    │
 │  role        :  Full Stack Developer | AI/ML Enthusiast  │
 │  currently   :  React · AWS · System Design · AI/ML     │
-│  looking_for :  Internships | SWE | AI Roles            │
+│  looking_for :  Internships | SWE | AI/ML Roles         │
 │  fun_fact    :  Coffee → Code · Slides → Masterpieces   │
 └─────────────────────────────────────────────────────────┘
 ```
@@ -74,9 +105,7 @@
 
 ---
 
-<!--  ╔══════════════════════════════════════╗
-      ║        macOS Window: Tech Stack      ║
-      ╚══════════════════════════════════════╝  -->
+<!--  Tech Stack  -->
 
 <table width="100%">
 <thead>
@@ -119,9 +148,7 @@
 
 ---
 
-<!--  ╔══════════════════════════════════════╗
-      ║       macOS Window: Projects         ║
-      ╚══════════════════════════════════════╝  -->
+<!--  Projects  -->
 
 <table width="100%">
 <thead>
@@ -141,7 +168,6 @@
 | **🤖 CODEC AI ChatBot** | Smart AI chatbot built with Python, Flask & TensorFlow for company info, internship details & service guidance | `Python` `Flask` `TensorFlow` `JS` | [→](https://github.com/subhambiswalrony/CODEC-AI-Powered-ChatBot) |
 | **🛢️ IndianOil Chemical Portal** | Full-stack enterprise web portal for Indian Oil employees to log, manage & review daily chemical consumption ⭐15 | `TypeScript` `React` `MySQL` | [→](https://github.com/subhambiswalrony/Indian-Oil---Daily-Chemical-Consumption-Portal) |
 | **📄 Java Resume Builder** | Desktop GUI app that lets users fill in their details and generate polished, formatted PDF resumes in one click | `Java` `Swing` `PDF` | [→](https://github.com/subhambiswalrony/JAVA-Resume-Builder) |
-| **🌐 React Portfolio** | Modern personal portfolio website built with React showcasing projects, skills, and professional experience | `React` `JavaScript` `CSS` | [→](https://biswalsubham.vercel.app/) |
 
 </td>
 </tr>
@@ -152,42 +178,7 @@
 
 ---
 
-<!--  ╔══════════════════════════════════════╗
-      ║      macOS Window: Achievements      ║
-      ╚══════════════════════════════════════╝  -->
-
-<table width="100%">
-<thead>
-<tr>
-<td>
-&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham — experience.log</code></b>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-| 🎖️ Achievement | 🏢 Organization | 📅 |
-|:---|:---|:---:|
-| 🏅 **Software Development Intern** | Infosys Springboard | 2024–25 |
-| 💼 **Web Development Intern** | ShadowFox | 2024 |
-| 🤖 **AI/ML Intern** | CodSoft | 2024 |
-| 🖥️ **Web Development Intern** | OctaNet Services | 2024 |
-| 🎤 **PPT L1 Trainee — Selected** | Integreon | 2025 |
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<br/>
-
----
-
-<!--  ╔══════════════════════════════════════╗
-      ║      macOS Window: GitHub Stats      ║
-      ╚══════════════════════════════════════╝  -->
+<!--  GitHub Stats  -->
 
 <table width="100%">
 <thead>
@@ -221,44 +212,7 @@
 
 ---
 
-<!--  ╔══════════════════════════════════════╗
-      ║   macOS Window: Contribution Snake   ║
-      ╚══════════════════════════════════════╝  -->
-
-<table width="100%">
-<thead>
-<tr>
-<td>
-&nbsp;🔴&nbsp;🟡&nbsp;🟢&nbsp;&nbsp;&nbsp;<b><code>~/subham — contributions.svg</code></b>
-</td>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-<div align="center">
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake.svg" />
-  <img alt="Snake eating my contributions" src="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake-dark.svg" />
-</picture>
-
-</div>
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<br/>
-
----
-
-<!--  ╔══════════════════════════════════════╗
-      ║      macOS Window: Trophies          ║
-      ╚══════════════════════════════════════╝  -->
+<!--  Trophies  -->
 
 <table width="100%">
 <thead>
@@ -274,7 +228,7 @@
 
 <div align="center">
 
-<img src="https://github-profile-trophy.vercel.app/?username=subhambiswalrony&theme=tokyonight&no-frame=false&no-bg=true&margin-w=6&column=7" alt="GitHub Trophies" />
+<img src="https://github-profile-trophy.vercel.app/?username=subhambiswalrony&theme=algolia&no-frame=true&no-bg=false&margin-w=8&column=4&rank=SECRET,SSS,SS,S,AAA,AA,A,B,C" alt="GitHub Trophies" />
 
 </div>
 
@@ -287,9 +241,7 @@
 
 ---
 
-<!--  ╔══════════════════════════════════════╗
-      ║      macOS Window: Goals             ║
-      ╚══════════════════════════════════════╝  -->
+<!--  Goals  -->
 
 <table width="100%">
 <thead>
