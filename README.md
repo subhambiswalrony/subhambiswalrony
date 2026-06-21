@@ -178,7 +178,7 @@
 
 ### 🔴 🟡 🟢 &nbsp; `~/subham — goals.sh`
 
-<div align="center">
+<div align="left">
 
 <br/>
 
