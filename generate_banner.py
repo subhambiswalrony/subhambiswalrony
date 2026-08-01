@@ -1,6 +1,9 @@
 """
-Generate animated terminal-style SVG banner — 100% Logo-based with 3 full crisp logo layers + morphing particles.
-Logos: GitHub (25231.png) -> Vercel (711284.png) -> Code (</>).
+Generate animated terminal-style SVG banner — 100% Logo-based (GitHub -> Code -> Vercel morphing loop).
+Logos: 
+  1. GitHub Octocat Logo (25231.png)
+  2. Code Logo (</>)
+  3. Vercel Triangle Logo (Exact vector triangle path M37.5274 0L75.0548 65H0L37.5274 0Z)
 """
 
 import numpy as np
@@ -29,18 +32,18 @@ NUM_TRAVELLERS   = 2000
 
 # 9 Keytimes for 3-logo loop cycle:
 # 0.000-0.194: GitHub Hold
-# 0.194-0.288: Transition to Vercel
-# 0.288-0.432: Vercel Hold
-# 0.432-0.525: Transition to Code
-# 0.525-0.669: Code Hold
+# 0.194-0.288: Transition to Code
+# 0.288-0.432: Code Hold
+# 0.432-0.525: Transition to Vercel
+# 0.525-0.669: Vercel Hold
 # 0.669-0.763: Transition to GitHub
 # 0.763-1.000: GitHub Hold
 KEY_TIMES = "0.000;0.194;0.288;0.432;0.525;0.669;0.763;0.906;1.000"
 
 # Opacity keyframes for each full logo layer
 GITHUB_OPACITY = "1;1;0;0;0;0;1;1;1"
-VERCEL_OPACITY = "0;0;1;1;0;0;0;0;0"
-CODE_OPACITY   = "0;0;0;0;1;1;0;0;0"
+CODE_OPACITY   = "0;0;1;1;0;0;0;0;0"
+VERCEL_OPACITY = "0;0;0;0;1;1;0;0;0"
 
 TRAVELLER_OPACITY = "0.8;0.8;0.8;0.8;0.8;0.8;0.8;0.8;0.8"
 
@@ -92,30 +95,46 @@ def floyd_steinberg_dither(arr):
     return result
 
 
-def load_logo_dots(path_or_text, is_text=False):
-    """Load PNG or render text into centered 1:1 ratio 300x340 bitmap and dither."""
+def load_github_logo():
+    """Load 25231.png alpha channel into 300x340 canvas and dither."""
     canvas = Image.new("L", (GRID_W, GRID_H), 0)
-    if is_text:
-        draw = ImageDraw.Draw(canvas)
-        try:
-            font = ImageFont.truetype("arial.ttf", 160)
-        except:
-            font = ImageFont.load_default()
-        bbox = draw.textbbox((0, 0), path_or_text, font=font)
-        w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
-        draw.text(((GRID_W - w) // 2 - bbox[0], (GRID_H - h) // 2 - bbox[1]), path_or_text, fill=255, font=font)
-    else:
-        img = Image.open(path_or_text).convert("RGBA")
-        img.thumbnail((220, 220), Image.LANCZOS)
-        w, h = img.size
-        offset = ((GRID_W - w) // 2, (GRID_H - h) // 2)
-        alpha = img.split()[3]
-        canvas.paste(alpha, offset)
-
+    img = Image.open("25231.png").convert("RGBA")
+    img.thumbnail((220, 220), Image.LANCZOS)
+    w, h = img.size
+    offset = ((GRID_W - w) // 2, (GRID_H - h) // 2)
+    alpha = img.split()[3]
+    canvas.paste(alpha, offset)
     arr = np.array(canvas, dtype=np.float64)
     bm = floyd_steinberg_dither(arr)
-    dots = [(x, y) for y in range(GRID_H) for x in range(GRID_W) if bm[y, x]]
-    return dots
+    return [(x, y) for y in range(GRID_H) for x in range(GRID_W) if bm[y, x]]
+
+
+def load_code_logo():
+    """Render </> code symbol centered in 300x340 canvas and dither."""
+    canvas = Image.new("L", (GRID_W, GRID_H), 0)
+    draw = ImageDraw.Draw(canvas)
+    try:
+        font = ImageFont.truetype("arial.ttf", 160)
+    except:
+        font = ImageFont.load_default()
+    bbox = draw.textbbox((0, 0), "</>", font=font)
+    w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
+    draw.text(((GRID_W - w) // 2 - bbox[0], (GRID_H - h) // 2 - bbox[1]), "</>", fill=255, font=font)
+    arr = np.array(canvas, dtype=np.float64)
+    bm = floyd_steinberg_dither(arr)
+    return [(x, y) for y in range(GRID_H) for x in range(GRID_W) if bm[y, x]]
+
+
+def load_vercel_logo():
+    """Render exact Vercel triangle (path M37.5274 0L75.0548 65H0L37.5274 0Z) centered in 300x340 and dither."""
+    canvas = Image.new("L", (GRID_W, GRID_H), 0)
+    draw = ImageDraw.Draw(canvas)
+    # Centered bold Vercel triangle: top=(150, 75), bottom-right=(255, 255), bottom-left=(45, 255)
+    polygon = [(150, 75), (255, 255), (45, 255)]
+    draw.polygon(polygon, fill=255)
+    arr = np.array(canvas, dtype=np.float64)
+    bm = floyd_steinberg_dither(arr)
+    return [(x, y) for y in range(GRID_H) for x in range(GRID_W) if bm[y, x]]
 
 
 def dots_to_path(dots):
@@ -159,40 +178,40 @@ def generate_svg(is_dark=True):
         glow_panel='<rect x="36" y="84" width="400" height="492" rx="10" fill="none" stroke="#0891B2" stroke-width="2" opacity="0.45" filter="url(#glow3)"/>'
         panel_grad_def=''
 
-    # Load 3 logos
-    github_dots = load_logo_dots("25231.png")
-    vercel_dots = load_logo_dots("711284.png")
-    code_dots   = load_logo_dots("</>", is_text=True)
+    # Load 3 distinct logos in exact sequence: GitHub -> Code -> Vercel
+    github_dots = load_github_logo()
+    code_dots   = load_code_logo()
+    vercel_dots = load_vercel_logo()
 
-    # Match travellers across GitHub -> Vercel -> Code -> GitHub
+    # Match travellers across GitHub -> Code -> Vercel -> GitHub
     random.seed(42)
     n_trav = min(NUM_TRAVELLERS, len(github_dots))
     traveller_indices = random.sample(range(len(github_dots)), n_trav)
     trav_github = [github_dots[i] for i in traveller_indices]
 
-    vercel_pts = np.array(vercel_dots, dtype=np.float64)
     code_pts   = np.array(code_dots, dtype=np.float64)
+    vercel_pts = np.array(vercel_dots, dtype=np.float64)
 
     travellers_mapped = []
     for pt in trav_github:
         sp = np.array(pt, dtype=np.float64)
-        # Nearest in Vercel
-        d1 = np.sqrt(np.sum((vercel_pts - sp) ** 2, axis=1))
-        near_v = vercel_dots[np.argmin(d1)]
         # Nearest in Code
-        d2 = np.sqrt(np.sum((code_pts - sp) ** 2, axis=1))
-        near_c = code_dots[np.argmin(d2)]
-        travellers_mapped.append((pt, near_v, near_c))
+        d1 = np.sqrt(np.sum((code_pts - sp) ** 2, axis=1))
+        near_c = code_dots[np.argmin(d1)]
+        # Nearest in Vercel
+        d2 = np.sqrt(np.sum((vercel_pts - sp) ** 2, axis=1))
+        near_v = vercel_dots[np.argmin(d2)]
+        travellers_mapped.append((pt, near_c, near_v))
 
-    # Intro groups for GitHub logo shimmer
+    # Intro groups for GitHub logo shimmer (0 - 3.2s)
     intro_groups = scatter_into_groups(github_dots, NUM_INTRO_GROUPS, seed=42)
 
     # Full logo paths for crisp rendering during each phase
     github_path_d = dots_to_path(github_dots)
-    vercel_path_d = dots_to_path(vercel_dots)
     code_path_d   = dots_to_path(code_dots)
+    vercel_path_d = dots_to_path(vercel_dots)
 
-    print(f"  {'Dark' if is_dark else 'Light'}: GitHub ({len(github_dots)} dots), Vercel ({len(vercel_dots)} dots), Code ({len(code_dots)} dots), {n_trav} travellers")
+    print(f"  {'Dark' if is_dark else 'Light'}: GitHub ({len(github_dots)} dots), Code ({len(code_dots)} dots), Vercel ({len(vercel_dots)} dots), {n_trav} travellers")
 
     trav_id = "tvdark" if is_dark else "tvlight"
     p = []
@@ -246,24 +265,24 @@ def generate_svg(is_dark=True):
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})" fill="{dot_color}" shape-rendering="crispEdges" opacity="0">')
     p.append(f'<set attributeName="opacity" to="1" begin="{INTRO_DUR}s"/>')
 
-    # 1. Full GitHub Logo Layer
+    # 1. Full GitHub Logo Layer (Phase 1: 0.000 - 0.194)
     p.append(f'<g opacity="1"><animate attributeName="opacity" values="{GITHUB_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{github_path_d}"/></g>')
 
-    # 2. Full Vercel Logo Layer
-    p.append(f'<g opacity="0"><animate attributeName="opacity" values="{VERCEL_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{vercel_path_d}"/></g>')
-
-    # 3. Full Code Logo Layer
+    # 2. Full Code Logo Layer (Phase 2: 0.288 - 0.432)
     p.append(f'<g opacity="0"><animate attributeName="opacity" values="{CODE_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{code_path_d}"/></g>')
+
+    # 3. Full Vercel Triangle Logo Layer (Phase 3: 0.525 - 0.669)
+    p.append(f'<g opacity="0"><animate attributeName="opacity" values="{VERCEL_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{vercel_path_d}"/></g>')
 
     p.append('</g>')
 
-    # === TRAVELLER LAYER — Morphs particles between GitHub ↔ Vercel ↔ Code ===
+    # === TRAVELLER LAYER — Morphs particles GitHub -> Code -> Vercel -> GitHub ===
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})">')
-    for pt, v, c in travellers_mapped:
+    for pt, c, v in travellers_mapped:
         gx, gy = pt
-        vx, vy = v
         cx, cy = c
-        translate_values = f"{gx} {gy};{gx} {gy};{vx} {vy};{vx} {vy};{cx} {cy};{cx} {cy};{gx} {gy};{gx} {gy};{gx} {gy}"
+        vx, vy = v
+        translate_values = f"{gx} {gy};{gx} {gy};{cx} {cy};{cx} {cy};{vx} {vy};{vx} {vy};{gx} {gy};{gx} {gy};{gx} {gy}"
         p.append(f'<use href="#{trav_id}" opacity="0"><animate attributeName="opacity" values="{TRAVELLER_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="{translate_values}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/></use>')
     p.append('</g>')
 
@@ -323,7 +342,7 @@ def generate_svg(is_dark=True):
 
 
 def main():
-    print("=== Generating SVG banners (Full 3-Logo layers + particle morphing) ===\n")
+    print("=== Generating SVG banners (GitHub -> Code -> Vercel exact loop) ===\n")
 
     print("[1/2] Generating dark.svg...")
     dark_svg = generate_svg(is_dark=True)
@@ -337,7 +356,7 @@ def main():
         f.write(light_svg)
     print(f"  Wrote light.svg ({len(light_svg):,} bytes)")
 
-    print("\nDone! Animation: GitHub logo -> Vercel logo -> Code logo -> GitHub logo")
+    print("\nDone! Animation: GitHub logo -> Code logo -> Vercel triangle logo -> GitHub logo")
 
 
 if __name__ == "__main__":
