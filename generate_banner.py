@@ -1,21 +1,14 @@
 """
-Generate animated terminal-style SVG banner — matches arifhaxn architecture exactly.
-
-Architecture:
-  1. Intro layer: ~60 groups fade in over ~2s, then `<set opacity="0" begin="3.2s"/>`
-  2. Loop layer: ~94 drift bands, each with translate+opacity keyframes over 13.9s
-     Phase: portrait(2.7s) → transition(1.3s) → logo1(2.7s) → transition(1.3s) → logo2(2.7s) → transition(1.3s)
-  3. All dots are individual 1×1 pixels using path "M{x} {y}h1v1h-1z"
-  4. Portrait grid: 300×340, scaled via transform to fit 400×492 panel
+Generate animated terminal-style SVG banner — 100% Logo-based (GitHub -> Vercel -> Code logo morphing).
+No human photo/portrait. Uses 1:1 aspect ratio PNG logo assets (25231.png for GitHub, 711284.png for Vercel).
 """
 
 import numpy as np
-from PIL import Image, ImageEnhance, ImageFilter, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 import os, math, random
 
 # ──── Config ────
-PHOTO_PATH   = "168572456.jpg"
-OUT_DIR      = "."
+OUT_DIR = "."
 GRID_W, GRID_H = 300, 340
 
 # Panel geometry
@@ -27,22 +20,21 @@ SCALE_Y = 1.4471
 
 CANVAS_W, CANVAS_H = 1180, 610
 
-# Animation
+# Animation timing
 INTRO_DUR   = 3.2       # seconds until loop starts
 CYCLE_DUR   = 13.9      # total loop duration
 NUM_INTRO_GROUPS = 60
 NUM_DRIFT_BANDS  = 94
+NUM_TRAVELLERS   = 1200
 
-# keyTimes for 2-logo loop (7 values)
-KEY_TIMES = "0.000;0.200;0.300;0.500;0.600;0.800;1.000"
+# 9 Keytimes for 3-logo loop cycle: GitHub (0.0-0.194) -> Vercel (0.288-0.432) -> Code (0.525-0.669) -> GitHub (0.763-1.000)
+KEY_TIMES = "0.000;0.194;0.288;0.432;0.525;0.669;0.763;0.906;1.000"
 
-# Portrait loop opacity (visible during portrait, hidden during logo 1 & 2)
-PORTRAIT_OPACITY = "1;1;0;0;0;0;1"
+# Drift bands fade out when travellers morph to Vercel/Code
+DRIFT_OPACITY = "1;1;0;0;0;0;0;0;1"
 
-# Traveller opacity (hidden during portrait, visible during logo 1 & 2)
-TRAVELLER_OPACITY = "0;0;1;1;1;1;0"
-
-NUM_TRAVELLERS = 900
+# Traveller dots stay visible during loop forming logos and transitioning
+TRAVELLER_OPACITY = "1;1;1;1;1;1;1;1;1"
 
 INFO = {
     "email":     "biswalsubhamrony@gmail.com",
@@ -65,32 +57,8 @@ INFO = {
 }
 
 
-def load_and_prepare(path, grid_w, grid_h, for_dark=False):
-    img = Image.open(path).convert("RGB")
-    w, h = img.size
-    target_ratio = grid_w / grid_h
-    current_ratio = w / h
-    if current_ratio > target_ratio:
-        new_w = int(h * target_ratio)
-        left = (w - new_w) // 2
-        img = img.crop((left, 0, left + new_w, h))
-    else:
-        new_h = int(w / target_ratio)
-        img = img.crop((0, 0, w, min(new_h, h)))
-
-    img = img.resize((grid_w, grid_h), Image.LANCZOS)
-    img = ImageEnhance.Contrast(img).enhance(1.3)
-    gray = img.convert("L")
-    arr = np.array(gray, dtype=np.float64)
-
-    if for_dark:
-        # Invert: light bg -> dark (few dots), dark subject -> light (many dots)
-        arr = 255.0 - arr
-        arr = np.clip(arr * 1.4, 0, 255)
-    return arr
-
-
 def floyd_steinberg_dither(arr):
+    """1-bit Floyd-Steinberg dithering."""
     h, w = arr.shape
     img = arr.copy()
     result = np.zeros((h, w), dtype=bool)
@@ -116,46 +84,36 @@ def floyd_steinberg_dither(arr):
     return result
 
 
-def get_dot_list(bitmap):
-    """Return list of (x, y) for all active dots."""
-    dots = []
-    h, w = bitmap.shape
-    for y in range(h):
-        for x in range(w):
-            if bitmap[y, x]:
-                dots.append((x, y))
+def load_logo_dots(path_or_text, is_text=False):
+    """Load PNG or render text into centered 1:1 ratio 300x340 bitmap and dither."""
+    canvas = Image.new("L", (GRID_W, GRID_H), 0)
+    if is_text:
+        draw = ImageDraw.Draw(canvas)
+        try:
+            font = ImageFont.truetype("arial.ttf", 160)
+        except:
+            font = ImageFont.load_default()
+        bbox = draw.textbbox((0, 0), path_or_text, font=font)
+        w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        draw.text(((GRID_W - w) // 2 - bbox[0], (GRID_H - h) // 2 - bbox[1]), path_or_text, fill=255, font=font)
+    else:
+        img = Image.open(path_or_text).convert("RGBA")
+        # Thumbnail to 220x220 square (1:1 ratio preserved)
+        img.thumbnail((220, 220), Image.LANCZOS)
+        w, h = img.size
+        offset = ((GRID_W - w) // 2, (GRID_H - h) // 2)
+        alpha = img.split()[3]
+        canvas.paste(alpha, offset)
+
+    arr = np.array(canvas, dtype=np.float64)
+    bm = floyd_steinberg_dither(arr)
+    dots = [(x, y) for y in range(GRID_H) for x in range(GRID_W) if bm[y, x]]
     return dots
 
 
 def dots_to_path(dots):
     """Convert list of (x,y) to SVG path string — individual 1x1 rects."""
     return "".join(f"M{x} {y}h1v1h-1z" for x, y in dots)
-
-
-def make_logo_bitmap(text, grid_w, grid_h, font_size=200):
-    """Create a dithered bitmap from text."""
-    img = Image.new("L", (grid_w, grid_h), 0)
-    draw = ImageDraw.Draw(img)
-    try:
-        font = ImageFont.truetype("arial.ttf", font_size)
-    except:
-        font = ImageFont.load_default()
-    bbox = draw.textbbox((0, 0), text, font=font)
-    tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
-    x = (grid_w - tw) // 2 - bbox[0]
-    y = (grid_h - th) // 2 - bbox[1]
-    draw.text((x, y), text, fill=255, font=font)
-    return floyd_steinberg_dither(np.array(img, dtype=np.float64))
-
-
-def make_vercel_bitmap(grid_w, grid_h):
-    """Create Vercel triangle bitmap."""
-    img = Image.new("L", (grid_w, grid_h), 0)
-    draw = ImageDraw.Draw(img)
-    cx, cy = grid_w // 2, grid_h // 2
-    size = min(grid_w, grid_h) // 3
-    draw.polygon([(cx, cy - size), (cx - size, cy + size), (cx + size, cy + size)], fill=255)
-    return floyd_steinberg_dither(np.array(img, dtype=np.float64))
 
 
 def compute_centroid(dots):
@@ -167,7 +125,6 @@ def compute_centroid(dots):
 
 
 def scatter_into_groups(dots, n_groups, seed=42):
-    """Scatter dots into groups ensuring spatial evenness."""
     random.seed(seed)
     indices = list(range(len(dots)))
     random.shuffle(indices)
@@ -178,37 +135,12 @@ def scatter_into_groups(dots, n_groups, seed=42):
 
 
 def compute_drift_offsets(dots_group, target_centroid):
-    """Compute the translate offset to move this group's centroid toward the target."""
     if not dots_group:
         return (0, 0)
     cx, cy = compute_centroid(dots_group)
-    # Move ~42% toward the target
     dx = int((target_centroid[0] - cx) * 0.42)
     dy = int((target_centroid[1] - cy) * 0.42)
     return (dx, dy)
-
-
-def match_dots_nearest(src_positions, dst_positions, n_travellers):
-    random.seed(42)
-    # Sample traveler indices from source
-    src_indices = random.sample(range(len(src_positions)), min(n_travellers, len(src_positions)))
-    src_pts = np.array([src_positions[i] for i in src_indices], dtype=np.float64)
-    dst_pts = np.array(dst_positions, dtype=np.float64)
-    
-    matched = []
-    used_dst = set()
-    for i, sp in enumerate(src_pts):
-        dists = np.sqrt(np.sum((dst_pts - sp) ** 2, axis=1))
-        order = np.argsort(dists)
-        for j in order:
-            if j not in used_dst:
-                used_dst.add(j)
-                matched.append((src_indices[i], sp, dst_pts[j]))
-                break
-        else:
-            j = order[0]
-            matched.append((src_indices[i], sp, dst_pts[j]))
-    return matched
 
 
 def svg_info_row(y, label, value, accent, text_color, leader, begin):
@@ -217,7 +149,7 @@ def svg_info_row(y, label, value, accent, text_color, leader, begin):
     return f'<g opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="{begin:.2f}s" fill="freeze"/><animateTransform attributeName="transform" type="translate" values="-8 0;0 0" dur="0.4s" begin="{begin:.2f}s" fill="freeze"/><text x="470" y="{y}" font-size="14" textLength="655" lengthAdjust="spacingAndGlyphs" xml:space="preserve"><tspan fill="{accent}">{label} </tspan><tspan fill="{leader}">{dots}</tspan><tspan fill="{text_color}" font-weight="600"> {value}</tspan></text></g>'
 
 
-def generate_svg(portrait_bitmap, is_dark=True):
+def generate_svg(is_dark=True):
     if is_dark:
         outer_bg="#070B16"; bg="url(#panelGrad)"; inner_bg="#0A101F"; dot_color="#A78BFA"; accent="#22D3EE"; violet="#7C3AED"
         emerald="#10B981"; text_c="#F8FAFC"; muted="#94A3B8"; dim="#475569"
@@ -237,43 +169,40 @@ def generate_svg(portrait_bitmap, is_dark=True):
         glow_panel='<rect x="36" y="84" width="400" height="492" rx="10" fill="none" stroke="#0891B2" stroke-width="2" opacity="0.45" filter="url(#glow3)"/>'
         panel_grad_def=''
 
-    portrait_dots = get_dot_list(portrait_bitmap)
+    # Load 3 logos
+    github_dots = load_logo_dots("25231.png")
+    vercel_dots = load_logo_dots("711284.png")
+    code_dots = load_logo_dots("</>", is_text=True)
 
-    # Generate logo bitmaps
-    vercel_bm = make_vercel_bitmap(GRID_W, GRID_H)
-    code_bm = make_logo_bitmap("</>", GRID_W, GRID_H, font_size=200)
-    logo1_dots = get_dot_list(vercel_bm)
-    logo2_dots = get_dot_list(code_bm)
-    logo1_centroid = compute_centroid(logo1_dots)
+    vercel_centroid = compute_centroid(vercel_dots)
 
-    # Match travellers to Vercel and Code logos
+    # Match travellers across GitHub -> Vercel -> Code
     random.seed(42)
-    n_trav = min(NUM_TRAVELLERS, len(portrait_dots))
-    traveller_indices = random.sample(range(len(portrait_dots)), n_trav)
-    traveller_portrait_pts = [portrait_dots[i] for i in traveller_indices]
-    
-    logo1_pts = np.array(logo1_dots, dtype=np.float64)
-    logo2_pts = np.array(logo2_dots, dtype=np.float64)
-    
+    n_trav = min(NUM_TRAVELLERS, len(github_dots))
+    traveller_indices = random.sample(range(len(github_dots)), n_trav)
+    trav_github = [github_dots[i] for i in traveller_indices]
+
+    vercel_pts = np.array(vercel_dots, dtype=np.float64)
+    code_pts = np.array(code_dots, dtype=np.float64)
+
     travellers_mapped = []
-    for pt in traveller_portrait_pts:
+    for pt in trav_github:
         sp = np.array(pt, dtype=np.float64)
-        # Nearest in logo1 (Vercel)
-        d1 = np.sqrt(np.sum((logo1_pts - sp) ** 2, axis=1))
-        nearest_l1 = logo1_dots[np.argmin(d1)]
-        # Nearest in logo2 (Code)
-        d2 = np.sqrt(np.sum((logo2_pts - sp) ** 2, axis=1))
-        nearest_l2 = logo2_dots[np.argmin(d2)]
-        travellers_mapped.append((pt, nearest_l1, nearest_l2))
+        # Nearest in Vercel
+        d1 = np.sqrt(np.sum((vercel_pts - sp) ** 2, axis=1))
+        near_v = vercel_dots[np.argmin(d1)]
+        # Nearest in Code
+        d2 = np.sqrt(np.sum((code_pts - sp) ** 2, axis=1))
+        near_c = code_dots[np.argmin(d2)]
+        travellers_mapped.append((pt, near_v, near_c))
 
-    # Intro groups (scattered for shimmer effect)
-    intro_groups = scatter_into_groups(portrait_dots, NUM_INTRO_GROUPS, seed=42)
+    # Intro groups for GitHub logo
+    intro_groups = scatter_into_groups(github_dots, NUM_INTRO_GROUPS, seed=42)
 
-    # Drift bands for loop layer (same dots, different grouping for drift)
-    drift_bands = scatter_into_groups(portrait_dots, NUM_DRIFT_BANDS, seed=99)
+    # Drift bands for loop layer
+    drift_bands = scatter_into_groups(github_dots, NUM_DRIFT_BANDS, seed=99)
 
-    total = len(portrait_dots)
-    print(f"  {'Dark' if is_dark else 'Light'}: {total} portrait dots, {len(logo1_dots)} vercel dots, {len(logo2_dots)} code dots, {n_trav} travellers")
+    print(f"  {'Dark' if is_dark else 'Light'}: GitHub ({len(github_dots)} dots), Vercel ({len(vercel_dots)} dots), Code ({len(code_dots)} dots), {n_trav} travellers")
 
     trav_id = "tvdark" if is_dark else "tvlight"
     p = []
@@ -312,7 +241,7 @@ def generate_svg(portrait_bitmap, is_dark=True):
 {glow_panel}
 <rect x="36" y="84" width="400" height="492" rx="10" fill="{inner_bg}" stroke="{panel_stroke}"/>''')
 
-    # === INTRO LAYER — fades in then disappears at 3.2s ===
+    # === INTRO LAYER — GitHub logo fades in then disappears at 3.2s ===
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})" fill="{dot_color}" shape-rendering="crispEdges">')
     p.append(f'<set attributeName="opacity" to="0" begin="{INTRO_DUR}s"/>')
 
@@ -323,27 +252,27 @@ def generate_svg(portrait_bitmap, is_dark=True):
 
     p.append('</g>')
 
-    # === LOOP LAYER — appears at 3.2s, drift bands animate ===
+    # === LOOP LAYER — Drift bands for GitHub logo ===
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})" fill="{dot_color}" shape-rendering="crispEdges" opacity="0">')
     p.append(f'<set attributeName="opacity" to="1" begin="{INTRO_DUR}s"/>')
 
     for i, band in enumerate(drift_bands):
         if not band:
             continue
-        dx, dy = compute_drift_offsets(band, logo1_centroid)
-        translate_values = f"0 0;0 0;{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};0 0"
+        dx, dy = compute_drift_offsets(band, vercel_centroid)
+        translate_values = f"0 0;0 0;{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};0 0"
         path_d = dots_to_path(band)
-        p.append(f'<g opacity="1"><animate attributeName="opacity" values="{PORTRAIT_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="{translate_values}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{path_d}"/></g>')
+        p.append(f'<g opacity="1"><animate attributeName="opacity" values="{DRIFT_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="{translate_values}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{path_d}"/></g>')
 
     p.append('</g>')
 
-    # === TRAVELLER LAYER — morphs between photo ↔ Vercel ↔ Code ===
+    # === TRAVELLER LAYER — Morphs GitHub ↔ Vercel ↔ Code ===
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})">')
-    for pt, l1, l2 in travellers_mapped:
-        px, py = pt
-        l1x, l1y = l1
-        l2x, l2y = l2
-        translate_values = f"{px} {py};{px} {py};{l1x} {l1y};{l1x} {l1y};{l2x} {l2y};{l2x} {l2y};{px} {py}"
+    for pt, v, c in travellers_mapped:
+        gx, gy = pt
+        vx, vy = v
+        cx, cy = c
+        translate_values = f"{gx} {gy};{gx} {gy};{vx} {vy};{vx} {vy};{cx} {cy};{cx} {cy};{gx} {gy};{gx} {gy};{gx} {gy}"
         p.append(f'<use href="#{trav_id}" opacity="0"><animate attributeName="opacity" values="{TRAVELLER_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="{translate_values}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/></use>')
     p.append('</g>')
 
@@ -403,29 +332,21 @@ def generate_svg(portrait_bitmap, is_dark=True):
 
 
 def main():
-    print("=== Generating SVG banners (arifhaxn architecture) ===\n")
+    print("=== Generating SVG banners (100% Logo-based: GitHub -> Vercel -> Code) ===\n")
 
-    print("[1/4] Processing dark mode...")
-    arr_dark = load_and_prepare(PHOTO_PATH, GRID_W, GRID_H, for_dark=True)
-    bm_dark = floyd_steinberg_dither(arr_dark)
-
-    print("[2/4] Processing light mode...")
-    arr_light = load_and_prepare(PHOTO_PATH, GRID_W, GRID_H, for_dark=False)
-    bm_light = floyd_steinberg_dither(arr_light)
-
-    print("[3/4] Generating dark.svg...")
-    dark_svg = generate_svg(bm_dark, is_dark=True)
+    print("[1/2] Generating dark.svg...")
+    dark_svg = generate_svg(is_dark=True)
     with open(os.path.join(OUT_DIR, "dark.svg"), "w", encoding="utf-8") as f:
         f.write(dark_svg)
     print(f"  Wrote dark.svg ({len(dark_svg):,} bytes)")
 
-    print("[4/4] Generating light.svg...")
-    light_svg = generate_svg(bm_light, is_dark=False)
+    print("[2/2] Generating light.svg...")
+    light_svg = generate_svg(is_dark=False)
     with open(os.path.join(OUT_DIR, "light.svg"), "w", encoding="utf-8") as f:
         f.write(light_svg)
     print(f"  Wrote light.svg ({len(light_svg):,} bytes)")
 
-    print("\nDone! Animation: portrait shimmer -> drift toward logo -> loop")
+    print("\nDone! Animation: GitHub logo shimmer -> morphs to Vercel -> Code logo -> GitHub logo")
 
 
 if __name__ == "__main__":
