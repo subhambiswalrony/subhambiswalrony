@@ -1,224 +1,77 @@
-<div align="center">
+<!-- ===== THEME-AWARE HERO BANNER ===== -->
+<!-- GitHub automatically shows dark.svg in dark mode and light.svg in light mode -->
 
-<img src="https://komarev.com/ghpvc/?username=subhambiswalrony&label=Profile+Views&color=6e40c9&style=for-the-badge" alt="Profile Views" />
-&nbsp;
-<img src="https://img.shields.io/github/followers/subhambiswalrony?label=Followers&style=for-the-badge&color=6e40c9" alt="Followers" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/main/dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/main/light.svg">
+  <img alt="Subham Biswal" src="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/main/light.svg">
+</picture>
 
-<br/><br/>
-
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&pause=1000&color=61DAFB&center=true&vCenter=true&width=750&lines=Hi+there%2C+I'm+Subham+Biswal+%F0%9F%91%8B;Full+Stack+Developer+%7C+AI%2FML+Enthusiast;Building+Scalable+Web+%26+AI+Solutions;Open+to+Internships+%26+Opportunities!" alt="Typing SVG" />
-
-<br/><br/>
-
-[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-biswalsubham.vercel.app-6e40c9?style=for-the-badge)](https://biswalsubham.vercel.app/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/subham-biswal/)
-[![Gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:biswalsubhamrony@gmail.com)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/subhambiswalrony)
-
-</div>
-
----
-
-### 🔴 🟡 🟢 &nbsp; `~/subham — contributions.svg`
+<!-- ===== GITHUB STATS ===== -->
 
 <div align="center">
+
+<!-- Streak — full width -->
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com/?user=subhambiswalrony&hide_border=true&background=0A101F&stroke=22D3EE&ring=A78BFA&fire=10B981&currStreakLabel=22D3EE&sideLabels=94A3B8&currStreakNum=F8FAFC&sideNums=F8FAFC&dates=64748B&titleColor=22D3EE&card_width=1180" />
+  <img width="100%" src="https://streak-stats.demolab.com/?user=subhambiswalrony&hide_border=true&background=FFFFFF&stroke=0891B2&ring=7C3AED&fire=059669&currStreakLabel=0891B2&sideLabels=475569&currStreakNum=0F172A&sideNums=0F172A&dates=94A3B8&titleColor=0891B2&card_width=1180" alt="Subham's streak" />
+</picture>
 
 <br/>
 
+<!-- Stats + Top languages — side by side -->
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake.svg" />
-  <img alt="Snake eating my contributions" src="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/github-contribution-grid-snake-dark.svg" />
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=subhambiswalrony&show_icons=true&count_private=true&include_all_commits=true&hide_rank=true&hide_border=true&title_color=22D3EE&icon_color=A78BFA&text_color=94A3B8&bg_color=0A101F&card_width=500" />
+  <img width="49%" src="https://github-readme-stats.vercel.app/api?username=subhambiswalrony&show_icons=true&count_private=true&include_all_commits=true&hide_rank=true&hide_border=true&title_color=0891B2&icon_color=7C3AED&text_color=0F172A&bg_color=FFFFFF&card_width=500" alt="Subham's GitHub stats" />
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=subhambiswalrony&layout=compact&langs_count=8&hide_border=true&title_color=22D3EE&text_color=94A3B8&bg_color=0A101F&card_width=500" />
+  <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=subhambiswalrony&layout=compact&langs_count=8&hide_border=true&title_color=0891B2&text_color=0F172A&bg_color=FFFFFF&card_width=500" alt="Top languages" />
 </picture>
 
 </div>
 
----
-
-### 🔴 🟡 🟢 &nbsp; `~/subham — achievements.json`
+<!-- ===== CONTRIBUTION SNAKE ===== -->
 
 <div align="center">
 
-<br/>
-
-<img src="https://github.githubassets.com/images/modules/profile/achievements/starstruck-default.png" width="80" title="Starstruck" alt="Starstruck" />&nbsp;<img src="https://github.githubassets.com/images/modules/profile/achievements/pair-extraordinaire-default.png" width="80" title="Pair Extraordinaire" alt="Pair Extraordinaire" />&nbsp;<img src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png" width="80" title="Pull Shark" alt="Pull Shark" />&nbsp;<img src="https://github.githubassets.com/images/modules/profile/achievements/yolo-default.png" width="80" title="YOLO" alt="YOLO" />&nbsp;<img src="https://github.githubassets.com/images/modules/profile/achievements/quickdraw-default.png" width="80" title="Quickdraw" alt="Quickdraw" />
-
-<br/>
-
-⭐ **Starstruck** &nbsp;|&nbsp; 👥 **Pair Extraordinaire** &nbsp;|&nbsp; 🦈 **Pull Shark** &nbsp;|&nbsp; 🎯 **YOLO** &nbsp;|&nbsp; ⚡ **Quickdraw**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/snake-light.svg" />
+  <img alt="Snake eating my contributions" src="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/output/snake-light.svg" />
+</picture>
 
 </div>
 
----
+<!-- ===== END SNAKE ===== -->
+<br/>
+<br/>
+<div align="center">
+<img width="100%" src="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/projects/projects.svg" alt="Projects" />
+</div>
 
-### 🔴 🟡 🟢 &nbsp; `~/subham — about.sh`
-
+<!-- ===== SOCIAL BADGES ===== -->
+<br/>
 <div align="center">
 
-<br/>
-
-```yaml
-┌─────────────────────────────────────────────────────────┐
-│                    subham@macbook ~                      │
-├─────────────────────────────────────────────────────────┤
-│  name        :  Subham Biswal                           │
-│  location    :  Odisha, India 🇮🇳                        │
-│  education   :  B.Tech CSE — GITA Autonomous College    │
-│  role        :  Full Stack Developer | AI/ML Enthusiast  │
-│  currently   :  React · AWS · System Design · AI/ML     │
-│  looking_for :  Internships | SWE | AI/ML Roles         │
-│  fun_fact    :  Coffee → Code · Slides → Masterpieces   │
-└─────────────────────────────────────────────────────────┘
-```
-
-<br/>
-
-🔭 Currently building **AI-powered web apps** and **automation tools**
-
-🌱 Actively learning **React**, **TailwindCSS**, **AWS**, and **Machine Learning**
-
-💡 Passionate about solving real-world problems through elegant software
-
-🎤 PowerPoint Specialist — selected as **PPT L1 Trainee** at Integreon
-
-🎵 Hobbies: Singing and crafting impactful presentations
-
+<a href="https://www.linkedin.com/in/subham-biswal/">
+  <img src="https://img.shields.io/badge/LinkedIn-0A101F?style=for-the-badge&logoColor=white&labelColor=0A101F&logo=data:image/svg+xml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTIwLjQ0NyAyMC40NTJoLTMuNTU0di01LjU2OWMwLTEuMzI4LS4wMjctMy4wMzctMS44NTItMy4wMzctMS44NTMgMC0yLjEzNiAxLjQ0NS0yLjEzNiAyLjkzOXY1LjY2N0g5LjM1MVY5aDMuNDE0djEuNTYxaC4wNDZjLjQ3Ny0uOSAxLjYzNy0xLjg1IDMuMzctMS44NSAzLjYwMSAwIDQuMjY3IDIuMzcgNC4yNjcgNS40NTV2Ni4yODZ6TTUuMzM3IDcuNDMzYy0xLjE0NCAwLTIuMDYzLS45MjYtMi4wNjMtMi4wNjUgMC0xLjEzOC45Mi0yLjA2MyAyLjA2My0yLjA2MyAxLjE0IDAgMi4wNjQuOTI1IDIuMDY0IDIuMDYzIDAgMS4xMzktLjkyNSAyLjA2NS0yLjA2NCAyLjA2NXptMS43ODIgMTMuMDE5SDMuNTU1VjloMy41NjR2MTEuNDUyek0yMi4yMjUgMEgxLjc3MUMuNzkyIDAgMCAuNzc0IDAgMS43Mjl2MjAuNTQyQzAgMjMuMjI3Ljc5MiAyNCAxLjc3MSAyNGgyMC40NTFDMjMuMiAyNCAyNCAyMy4yMjcgMjQgMjIuMjcxVjEuNzI5QzI0IC43NzQgMjMuMiAwIDIyLjIyNSAweiIvPjwvc3ZnPg==" alt="LinkedIn" />
+</a>
+&nbsp;&nbsp;
+<a href="https://biswalsubham.vercel.app/">
+  <img src="https://img.shields.io/badge/Portfolio-0A101F?style=for-the-badge&logo=vercel&logoColor=A78BFA&labelColor=0A101F" alt="Portfolio" />
+</a>
+&nbsp;&nbsp;
+<a href="https://www.instagram.com/subhambiswal_rony/">
+  <img src="https://img.shields.io/badge/Instagram-0A101F?style=for-the-badge&logo=instagram&logoColor=22D3EE&labelColor=0A101F" alt="Instagram" />
+</a>
+&nbsp;&nbsp;
+<a href="mailto:biswalsubhamrony@gmail.com">
+  <img src="https://img.shields.io/badge/Email-0A101F?style=for-the-badge&logo=gmail&logoColor=10B981&labelColor=0A101F" alt="Email" />
+</a>
+&nbsp;&nbsp;
 </div>
 
----
+<!-- ===== END SOCIAL BADGES ===== -->
 
-### 🔴 🟡 🟢 &nbsp; `~/subham — skills.json`
-
-<div align="center">
-
-<br/>
-
-**⚡ Frontend**
-
-<img src="https://skillicons.dev/icons?i=html,css,javascript,react,nextjs,tailwind,vite,threejs" />
-
-<br/>
-
-**⚙️ Backend & Languages**
-
-<img src="https://skillicons.dev/icons?i=python,java,nodejs,express,flask,django,c" />
-
-<br/>
-
-**🗄️ Database & Cloud**
-
-<img src="https://skillicons.dev/icons?i=mysql,mongodb,sqlite,firebase,aws" />
-
-<br/>
-
-**🛠️ Tools & IDE**
-
-<img src="https://skillicons.dev/icons?i=git,github,vscode,idea,pycharm,figma,npm,netlify" />
-
-</div>
-
----
-
-### 🔴 🟡 🟢 &nbsp; `~/subham/projects — ls -la`
-
-<div align="center">
-
-<br/>
-
-| 🏗️ Project | 📝 Description | 🔧 Stack | 🔗 |
-|:---:|:---:|:---:|:---:|
-| **🌾 AgriGPT** | AI-powered agricultural expert system giving real-time farming guidance to Indian farmers in native languages using advanced LLMs | `TypeScript` `Next.js` `AI/LLM` | [→](https://github.com/subhambiswalrony/AgriGPT-An-AI-Farmer-Intelligence) |
-| **🤖 CODEC AI ChatBot** | Smart AI chatbot built with Python, Flask & TensorFlow for company info, internship details & service guidance | `Python` `Flask` `TensorFlow` `JS` | [→](https://github.com/subhambiswalrony/CODEC-AI-Powered-ChatBot) |
-| **🛢️ IndianOil Chemical Portal** | Full-stack enterprise web portal for Indian Oil employees to log, manage & review daily chemical consumption ⭐15 | `TypeScript` `React` `MySQL` | [→](https://github.com/subhambiswalrony/Indian-Oil---Daily-Chemical-Consumption-Portal) |
-| **📄 Java Resume Builder** | Desktop GUI app that lets users fill their details and generate polished formatted PDF resumes in one click | `Java` `Swing` `PDF` | [→](https://github.com/subhambiswalrony/JAVA-Resume-Builder) |
-
-</div>
-
----
-
-### 🔴 🟡 🟢 &nbsp; `~/subham — git stats`
-
-<div align="center">
-
-<br/>
-
-<img src="https://streak-stats.demolab.com?user=subhambiswalrony&theme=dark&border_radius=12&count_private=true&ring=61DAFB&fire=61DAFB&currStreakLabel=61DAFB&sideLabels=61DAFB&stroke=61DAFB30" alt="GitHub Streak Stats" />
-
-<br/><br/>
-
-<img width="400" src="https://github-readme-stats.vercel.app/api?username=subhambiswalrony&count_private=true&show_icons=true&theme=react&rank_icon=github&border_radius=12&include_all_commits=true" alt="GitHub Stats" />
-<img width="340" src="https://github-readme-stats.vercel.app/api/top-langs/?username=subhambiswalrony&show_icons=true&locale=en&layout=compact&theme=react&border_radius=12&size_weight=0.5&count_weight=0.5&exclude_repo=github-readme-stats&langs_count=8" alt="Top Languages" />
-
-<br/><br/>
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=subhambiswalrony&bg_color=1a1b27&color=61DAFB&line=61DAFB&point=ffffff&area=true&area_color=61DAFB&hide_border=true&radius=8" alt="Contribution Graph" width="100%" />
-
-</div>
-
----
-
-### 🔴 🟡 🟢 &nbsp; `~/subham — trophies.sh`
-
-<div align="center">
-
-<br/>
-
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=subhambiswalrony&theme=2077" width="100%" alt="Profile Details" />
-
-<br/>
-
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=subhambiswalrony&theme=2077" alt="Repos per Language" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=subhambiswalrony&theme=2077" alt="Most Commit Language" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=subhambiswalrony&theme=2077" alt="Stats" />
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=subhambiswalrony&theme=2077&utcOffset=5.5" alt="Productive Time" />
-
-</div>
-
----
-
-### 🔴 🟡 🟢 &nbsp; `~/subham — goals.sh`
-
-<div align="left">
-
-<br/>
-
-```bash
-$ cat goals_2025_2026.txt
-
-🎯 2025–2026 Roadmap:
-  ├── 🔨  Build 3+ full-stack production applications
-  ├── ☁️  Achieve AWS Cloud Practitioner Certification
-  ├── 🤖  Deepen expertise in Machine Learning & LLM integration
-  ├── 🌍  Contribute to 5+ open-source projects
-  └── 💼  Secure a software engineering internship / full-time role
-
-$ echo "Let's build something amazing together 🚀"
-Let's build something amazing together 🚀
-```
-
-</div>
-
----
-
-<div align="center">
-
-### 💬 Let's Connect & Build Something Great!
-
-*Open to internships, freelance projects, and exciting collaborations.*
-
-<br/>
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/subham-biswal/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-6e40c9?style=for-the-badge&logo=vercel&logoColor=white)](https://biswalsubham.vercel.app/)
-[![Gmail](https://img.shields.io/badge/Gmail-Email_Me-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:biswalsubhamrony@gmail.com)
-[![Instagram](https://img.shields.io/badge/Instagram-Follow-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/subhambiswal_rony/)
-
-<br/>
-
-*"The best code is no code at all — but when you must write it, make it count."*
-
-⭐ **If you find my projects useful, drop a star!** ⭐
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12&height=100&section=footer" />
-
-</div>
+<!-- =================================== -->

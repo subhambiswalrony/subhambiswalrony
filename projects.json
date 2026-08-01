@@ -1,0 +1,30 @@
+[
+  {
+    "name": "AgriGPT",
+    "repo": "subhambiswalrony/AgriGPT-An-AI-Farmer-Intelligence",
+    "logo": "",
+    "description": "AI-powered agricultural expert system giving real-time farming guidance to Indian farmers in native languages using advanced LLMs",
+    "tags": ["TypeScript", "Next.js", "AI/LLM"]
+  },
+  {
+    "name": "CODEC AI ChatBot",
+    "repo": "subhambiswalrony/CODEC-AI-Powered-ChatBot",
+    "logo": "",
+    "description": "Smart AI chatbot built with Python, Flask & TensorFlow for company info, internship details & service guidance",
+    "tags": ["Python", "Flask", "TensorFlow"]
+  },
+  {
+    "name": "IndianOil Chemical Portal",
+    "repo": "subhambiswalrony/Indian-Oil---Daily-Chemical-Consumption-Portal",
+    "logo": "",
+    "description": "Full-stack enterprise web portal for Indian Oil employees to log, manage & review daily chemical consumption",
+    "tags": ["TypeScript", "React", "MySQL"]
+  },
+  {
+    "name": "Java Resume Builder",
+    "repo": "subhambiswalrony/JAVA-Resume-Builder",
+    "logo": "",
+    "description": "Desktop GUI app that lets users fill their details and generate polished formatted PDF resumes in one click",
+    "tags": ["Java", "Swing", "PDF"]
+  }
+]
