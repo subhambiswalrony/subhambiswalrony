@@ -31,6 +31,16 @@
 
 </div>
 
+<!-- ===== ACHIEVEMENTS ===== -->
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/main/achievements-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/main/achievements-light.svg" />
+  <img width="100%" alt="Achievements" src="https://raw.githubusercontent.com/subhambiswalrony/subhambiswalrony/main/achievements-light.svg" />
+</picture>
+</div>
+<br/>
+
 <!-- ===== CONTRIBUTION SNAKE ===== -->
 
 <div align="center">
