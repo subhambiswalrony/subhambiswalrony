@@ -219,21 +219,23 @@ def svg_info_row(y, label, value, accent, text_color, leader, begin):
 
 def generate_svg(portrait_bitmap, is_dark=True):
     if is_dark:
-        bg="#0A101F"; dot_color="#A78BFA"; accent="#22D3EE"; violet="#A78BFA"
+        outer_bg="#070B16"; bg="url(#panelGrad)"; inner_bg="#0A101F"; dot_color="#A78BFA"; accent="#22D3EE"; violet="#7C3AED"
         emerald="#10B981"; text_c="#F8FAFC"; muted="#94A3B8"; dim="#475569"
         pill_bg="#4C1D95"; pill_text="#E9D5FF"
         panel_stroke="rgba(34,211,238,0.35)"; line_color="rgba(255,255,255,0.10)"
         title_bar="#0B1222"; title_text="#94A3B8"
         leader="rgba(148,163,184,0.35)"; border_opacity="0.55"
         glow_panel='<rect x="36" y="84" width="400" height="492" rx="10" fill="none" stroke="#22D3EE" stroke-width="2" opacity="0.45" filter="url(#glow3)"/>'
+        panel_grad_def='<linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A101F"/><stop offset="1" stop-color="#0C1426"/></linearGradient>'
     else:
-        bg="#F8FAFC"; dot_color="#334155"; accent="#0891B2"; violet="#7C3AED"
+        outer_bg="#F8FAFC"; bg="#F8FAFC"; inner_bg="#F8FAFC"; dot_color="#334155"; accent="#0891B2"; violet="#7C3AED"
         emerald="#059669"; text_c="#0F172A"; muted="#475569"; dim="#94A3B8"
         pill_bg="#7C3AED"; pill_text="#FFFFFF"
         panel_stroke="rgba(8,145,178,0.30)"; line_color="rgba(0,0,0,0.08)"
         title_bar="#F1F5F9"; title_text="#475569"
         leader="rgba(100,116,139,0.25)"; border_opacity="0.35"
         glow_panel='<rect x="36" y="84" width="400" height="492" rx="10" fill="none" stroke="#0891B2" stroke-width="2" opacity="0.45" filter="url(#glow3)"/>'
+        panel_grad_def=''
 
     portrait_dots = get_dot_list(portrait_bitmap)
 
@@ -290,15 +292,14 @@ def generate_svg(portrait_bitmap, is_dark=True):
   <stop offset="1" stop-color="{accent}"/>
   <animateTransform attributeName="gradientTransform" type="translate" values="0 -120; 0 120; 0 -120" dur="9s" repeatCount="indefinite"/>
 </linearGradient>
+{panel_grad_def}
 <filter id="glow8" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="8"/></filter>
 <filter id="glow3" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3"/></filter>
 <filter id="txtGlow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="0.9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 <clipPath id="winClip"><rect x="2" y="2" width="1176" height="606" rx="18"/></clipPath>
 <rect id="{trav_id}" width="2.4" height="1.7" fill="{dot_color}"/>
-</defs>''')
-
-    # === Background + chrome ===
-    p.append(f'''<rect x="2" y="2" width="1176" height="606" rx="18" fill="{bg}"/>
+</defs>
+<rect x="2" y="2" width="1176" height="606" rx="18" fill="{outer_bg}"/>
 <g clip-path="url(#winClip)">
 <rect x="2" y="2" width="1176" height="606" fill="{bg}"/>
 <rect x="2" y="2" width="1176" height="46" fill="{title_bar}"/>
@@ -309,7 +310,7 @@ def generate_svg(portrait_bitmap, is_dark=True):
 <text x="590.0" y="29.0" text-anchor="middle" font-size="12" fill="{title_text}">{INFO["email"]} - % ./profile.sh --live</text>
 <text x="38" y="74" font-size="10" letter-spacing="3" fill="{dim}">VISUAL.MAP</text>
 {glow_panel}
-<rect x="36" y="84" width="400" height="492" rx="10" fill="{bg}" stroke="{panel_stroke}"/>''')
+<rect x="36" y="84" width="400" height="492" rx="10" fill="{inner_bg}" stroke="{panel_stroke}"/>''')
 
     # === INTRO LAYER — fades in then disappears at 3.2s ===
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})" fill="{dot_color}" shape-rendering="crispEdges">')
