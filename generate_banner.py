@@ -1,6 +1,6 @@
 """
-Generate animated terminal-style SVG banner — 100% Logo-based (GitHub -> Vercel -> Code logo morphing).
-No human photo/portrait. Uses 1:1 aspect ratio PNG logo assets (25231.png for GitHub, 711284.png for Vercel).
+Generate animated terminal-style SVG banner — 100% Logo-based with 3 full crisp logo layers + morphing particles.
+Logos: GitHub (25231.png) -> Vercel (711284.png) -> Code (</>).
 """
 
 import numpy as np
@@ -25,16 +25,24 @@ INTRO_DUR   = 3.2       # seconds until loop starts
 CYCLE_DUR   = 13.9      # total loop duration
 NUM_INTRO_GROUPS = 60
 NUM_DRIFT_BANDS  = 94
-NUM_TRAVELLERS   = 1200
+NUM_TRAVELLERS   = 2000
 
-# 9 Keytimes for 3-logo loop cycle: GitHub (0.0-0.194) -> Vercel (0.288-0.432) -> Code (0.525-0.669) -> GitHub (0.763-1.000)
+# 9 Keytimes for 3-logo loop cycle:
+# 0.000-0.194: GitHub Hold
+# 0.194-0.288: Transition to Vercel
+# 0.288-0.432: Vercel Hold
+# 0.432-0.525: Transition to Code
+# 0.525-0.669: Code Hold
+# 0.669-0.763: Transition to GitHub
+# 0.763-1.000: GitHub Hold
 KEY_TIMES = "0.000;0.194;0.288;0.432;0.525;0.669;0.763;0.906;1.000"
 
-# Drift bands fade out when travellers morph to Vercel/Code
-DRIFT_OPACITY = "1;1;0;0;0;0;0;0;1"
+# Opacity keyframes for each full logo layer
+GITHUB_OPACITY = "1;1;0;0;0;0;1;1;1"
+VERCEL_OPACITY = "0;0;1;1;0;0;0;0;0"
+CODE_OPACITY   = "0;0;0;0;1;1;0;0;0"
 
-# Traveller dots stay visible during loop forming logos and transitioning
-TRAVELLER_OPACITY = "1;1;1;1;1;1;1;1;1"
+TRAVELLER_OPACITY = "0.8;0.8;0.8;0.8;0.8;0.8;0.8;0.8;0.8"
 
 INFO = {
     "email":     "biswalsubhamrony@gmail.com",
@@ -98,7 +106,6 @@ def load_logo_dots(path_or_text, is_text=False):
         draw.text(((GRID_W - w) // 2 - bbox[0], (GRID_H - h) // 2 - bbox[1]), path_or_text, fill=255, font=font)
     else:
         img = Image.open(path_or_text).convert("RGBA")
-        # Thumbnail to 220x220 square (1:1 ratio preserved)
         img.thumbnail((220, 220), Image.LANCZOS)
         w, h = img.size
         offset = ((GRID_W - w) // 2, (GRID_H - h) // 2)
@@ -116,14 +123,6 @@ def dots_to_path(dots):
     return "".join(f"M{x} {y}h1v1h-1z" for x, y in dots)
 
 
-def compute_centroid(dots):
-    if not dots:
-        return (150, 170)
-    xs = [d[0] for d in dots]
-    ys = [d[1] for d in dots]
-    return (sum(xs) / len(xs), sum(ys) / len(ys))
-
-
 def scatter_into_groups(dots, n_groups, seed=42):
     random.seed(seed)
     indices = list(range(len(dots)))
@@ -132,15 +131,6 @@ def scatter_into_groups(dots, n_groups, seed=42):
     for i, idx in enumerate(indices):
         groups[i % n_groups].append(dots[idx])
     return groups
-
-
-def compute_drift_offsets(dots_group, target_centroid):
-    if not dots_group:
-        return (0, 0)
-    cx, cy = compute_centroid(dots_group)
-    dx = int((target_centroid[0] - cx) * 0.42)
-    dy = int((target_centroid[1] - cy) * 0.42)
-    return (dx, dy)
 
 
 def svg_info_row(y, label, value, accent, text_color, leader, begin):
@@ -172,18 +162,16 @@ def generate_svg(is_dark=True):
     # Load 3 logos
     github_dots = load_logo_dots("25231.png")
     vercel_dots = load_logo_dots("711284.png")
-    code_dots = load_logo_dots("</>", is_text=True)
+    code_dots   = load_logo_dots("</>", is_text=True)
 
-    vercel_centroid = compute_centroid(vercel_dots)
-
-    # Match travellers across GitHub -> Vercel -> Code
+    # Match travellers across GitHub -> Vercel -> Code -> GitHub
     random.seed(42)
     n_trav = min(NUM_TRAVELLERS, len(github_dots))
     traveller_indices = random.sample(range(len(github_dots)), n_trav)
     trav_github = [github_dots[i] for i in traveller_indices]
 
     vercel_pts = np.array(vercel_dots, dtype=np.float64)
-    code_pts = np.array(code_dots, dtype=np.float64)
+    code_pts   = np.array(code_dots, dtype=np.float64)
 
     travellers_mapped = []
     for pt in trav_github:
@@ -196,11 +184,13 @@ def generate_svg(is_dark=True):
         near_c = code_dots[np.argmin(d2)]
         travellers_mapped.append((pt, near_v, near_c))
 
-    # Intro groups for GitHub logo
+    # Intro groups for GitHub logo shimmer
     intro_groups = scatter_into_groups(github_dots, NUM_INTRO_GROUPS, seed=42)
 
-    # Drift bands for loop layer
-    drift_bands = scatter_into_groups(github_dots, NUM_DRIFT_BANDS, seed=99)
+    # Full logo paths for crisp rendering during each phase
+    github_path_d = dots_to_path(github_dots)
+    vercel_path_d = dots_to_path(vercel_dots)
+    code_path_d   = dots_to_path(code_dots)
 
     print(f"  {'Dark' if is_dark else 'Light'}: GitHub ({len(github_dots)} dots), Vercel ({len(vercel_dots)} dots), Code ({len(code_dots)} dots), {n_trav} travellers")
 
@@ -252,21 +242,22 @@ def generate_svg(is_dark=True):
 
     p.append('</g>')
 
-    # === LOOP LAYER — Drift bands for GitHub logo ===
+    # === FULL LOGO LAYERS (Activated at 3.2s) ===
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})" fill="{dot_color}" shape-rendering="crispEdges" opacity="0">')
     p.append(f'<set attributeName="opacity" to="1" begin="{INTRO_DUR}s"/>')
 
-    for i, band in enumerate(drift_bands):
-        if not band:
-            continue
-        dx, dy = compute_drift_offsets(band, vercel_centroid)
-        translate_values = f"0 0;0 0;{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};{-dx} {-dy};0 0"
-        path_d = dots_to_path(band)
-        p.append(f'<g opacity="1"><animate attributeName="opacity" values="{DRIFT_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="{translate_values}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{path_d}"/></g>')
+    # 1. Full GitHub Logo Layer
+    p.append(f'<g opacity="1"><animate attributeName="opacity" values="{GITHUB_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{github_path_d}"/></g>')
+
+    # 2. Full Vercel Logo Layer
+    p.append(f'<g opacity="0"><animate attributeName="opacity" values="{VERCEL_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{vercel_path_d}"/></g>')
+
+    # 3. Full Code Logo Layer
+    p.append(f'<g opacity="0"><animate attributeName="opacity" values="{CODE_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{code_path_d}"/></g>')
 
     p.append('</g>')
 
-    # === TRAVELLER LAYER — Morphs GitHub ↔ Vercel ↔ Code ===
+    # === TRAVELLER LAYER — Morphs particles between GitHub ↔ Vercel ↔ Code ===
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})">')
     for pt, v, c in travellers_mapped:
         gx, gy = pt
@@ -332,7 +323,7 @@ def generate_svg(is_dark=True):
 
 
 def main():
-    print("=== Generating SVG banners (100% Logo-based: GitHub -> Vercel -> Code) ===\n")
+    print("=== Generating SVG banners (Full 3-Logo layers + particle morphing) ===\n")
 
     print("[1/2] Generating dark.svg...")
     dark_svg = generate_svg(is_dark=True)
@@ -346,7 +337,7 @@ def main():
         f.write(light_svg)
     print(f"  Wrote light.svg ({len(light_svg):,} bytes)")
 
-    print("\nDone! Animation: GitHub logo shimmer -> morphs to Vercel -> Code logo -> GitHub logo")
+    print("\nDone! Animation: GitHub logo -> Vercel logo -> Code logo -> GitHub logo")
 
 
 if __name__ == "__main__":
