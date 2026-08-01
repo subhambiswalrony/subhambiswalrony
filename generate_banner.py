@@ -1,9 +1,6 @@
 """
 Generate animated terminal-style SVG banner — 100% Logo-based (GitHub -> Code -> Vercel morphing loop).
-Logos: 
-  1. GitHub Octocat Logo (25231.png)
-  2. Code Logo (</>)
-  3. Vercel Triangle Logo (Exact vector triangle path M37.5274 0L75.0548 65H0L37.5274 0Z)
+Clean, crisp static logos + fluid particle stream morph transitions using cubic-bezier easing (.4 0 .2 1).
 """
 
 import numpy as np
@@ -28,7 +25,7 @@ INTRO_DUR   = 3.2       # seconds until loop starts
 CYCLE_DUR   = 13.9      # total loop duration
 NUM_INTRO_GROUPS = 60
 NUM_DRIFT_BANDS  = 94
-NUM_TRAVELLERS   = 2000
+NUM_TRAVELLERS   = 1500
 
 # 9 Keytimes for 3-logo loop cycle:
 # 0.000-0.194: GitHub Hold
@@ -39,13 +36,15 @@ NUM_TRAVELLERS   = 2000
 # 0.669-0.763: Transition to GitHub
 # 0.763-1.000: GitHub Hold
 KEY_TIMES = "0.000;0.194;0.288;0.432;0.525;0.669;0.763;0.906;1.000"
+KEY_SPLINES = ".4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1"
 
-# Opacity keyframes for each full logo layer
+# Opacity keyframes for each full logo layer (crisp during hold, smooth crossfade)
 GITHUB_OPACITY = "1;1;0;0;0;0;1;1;1"
 CODE_OPACITY   = "0;0;1;1;0;0;0;0;0"
 VERCEL_OPACITY = "0;0;0;0;1;1;0;0;0"
 
-TRAVELLER_OPACITY = "0.8;0.8;0.8;0.8;0.8;0.8;0.8;0.8;0.8"
+# Traveller particles are ONLY visible during the transition phases (flow stream), hidden during static logo hold
+TRAVELLER_OPACITY = "0;0;1;0;1;0;1;0;0"
 
 INFO = {
     "email":     "biswalsubhamrony@gmail.com",
@@ -261,29 +260,29 @@ def generate_svg(is_dark=True):
 
     p.append('</g>')
 
-    # === FULL LOGO LAYERS (Activated at 3.2s) ===
+    # === FULL LOGO LAYERS (Clean static logos during hold phases, smooth crossfade during transitions) ===
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})" fill="{dot_color}" shape-rendering="crispEdges" opacity="0">')
     p.append(f'<set attributeName="opacity" to="1" begin="{INTRO_DUR}s"/>')
 
     # 1. Full GitHub Logo Layer (Phase 1: 0.000 - 0.194)
-    p.append(f'<g opacity="1"><animate attributeName="opacity" values="{GITHUB_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{github_path_d}"/></g>')
+    p.append(f'<g opacity="1"><animate attributeName="opacity" values="{GITHUB_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite" calcMode="spline" keySplines="{KEY_SPLINES}"/><path d="{github_path_d}"/></g>')
 
     # 2. Full Code Logo Layer (Phase 2: 0.288 - 0.432)
-    p.append(f'<g opacity="0"><animate attributeName="opacity" values="{CODE_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{code_path_d}"/></g>')
+    p.append(f'<g opacity="0"><animate attributeName="opacity" values="{CODE_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite" calcMode="spline" keySplines="{KEY_SPLINES}"/><path d="{code_path_d}"/></g>')
 
     # 3. Full Vercel Triangle Logo Layer (Phase 3: 0.525 - 0.669)
-    p.append(f'<g opacity="0"><animate attributeName="opacity" values="{VERCEL_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><path d="{vercel_path_d}"/></g>')
+    p.append(f'<g opacity="0"><animate attributeName="opacity" values="{VERCEL_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite" calcMode="spline" keySplines="{KEY_SPLINES}"/><path d="{vercel_path_d}"/></g>')
 
     p.append('</g>')
 
-    # === TRAVELLER LAYER — Morphs particles GitHub -> Code -> Vercel -> GitHub ===
+    # === TRAVELLER LAYER — Morphs particles ONLY during transition phases, hidden during logo hold ===
     p.append(f'<g transform="translate({TRANSLATE_X},{TRANSLATE_Y}) scale({SCALE_X:.4f},{SCALE_Y:.4f})">')
     for pt, c, v in travellers_mapped:
         gx, gy = pt
         cx, cy = c
         vx, vy = v
         translate_values = f"{gx} {gy};{gx} {gy};{cx} {cy};{cx} {cy};{vx} {vy};{vx} {vy};{gx} {gy};{gx} {gy};{gx} {gy}"
-        p.append(f'<use href="#{trav_id}" opacity="0"><animate attributeName="opacity" values="{TRAVELLER_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="{translate_values}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite"/></use>')
+        p.append(f'<use href="#{trav_id}" opacity="0"><animate attributeName="opacity" values="{TRAVELLER_OPACITY}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite" calcMode="spline" keySplines="{KEY_SPLINES}"/><animateTransform attributeName="transform" type="translate" values="{translate_values}" keyTimes="{KEY_TIMES}" dur="{CYCLE_DUR}s" begin="{INTRO_DUR}s" repeatCount="indefinite" calcMode="spline" keySplines="{KEY_SPLINES}"/></use>')
     p.append('</g>')
 
     # === Corner brackets ===
@@ -342,7 +341,7 @@ def generate_svg(is_dark=True):
 
 
 def main():
-    print("=== Generating SVG banners (GitHub -> Code -> Vercel exact loop) ===\n")
+    print("=== Generating SVG banners (Clean static logos + fluid particle transitions) ===\n")
 
     print("[1/2] Generating dark.svg...")
     dark_svg = generate_svg(is_dark=True)
